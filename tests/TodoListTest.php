@@ -11,8 +11,14 @@ use Slim\Psr7\Factory\ServerRequestFactory;
 
 final class TodoListTest extends TestCase
 {
+    /***
+     * @var \Psr\Container\ContainerInterface|null
+     */
     protected $container;
 
+    /**
+     * @var \Slim\App
+     */
     protected $app;
 
     /**
@@ -50,7 +56,7 @@ final class TodoListTest extends TestCase
     protected function createJsonRequest(
         string $method,
         $uri,
-        array $data = null
+        array $data = []
     ): ServerRequestInterface {
         $request = (new ServerRequestFactory())
             ->createServerRequest($method, $uri, []);
@@ -78,28 +84,10 @@ final class TodoListTest extends TestCase
     }
 
     /**
-     * Create a server request.
-     *
-     * @param  string  $method  The HTTP method
-     * @param  string|UriInterface  $uri  The URI
-     * @param  array  $serverParams  The server parameters
-     *
-     * @return ServerRequestInterface
-     */
-    protected function createRequest(
-        string $method,
-        $uri,
-        array $serverParams = []
-    ): ServerRequestInterface {
-        return (new ServerRequestFactory())
-            ->createServerRequest($method, $uri, $serverParams);
-    }
-
-    /**
      * Bootstrap app.
      *
      * @return void
-     * @throws UnexpectedValueException
+     * @throws UnexpectedValueException|Exception
      *
      */
     protected function setUp(): void
